@@ -15,6 +15,7 @@ public class Printer {
     public Printer() {
         this(20, 0, false);
         System.out.println("You bought a new printer!");
+        System.out.println("Duplex print feature is turned off.");
         displayTonerLevel();
         System.out.println("********************");
     }
@@ -22,7 +23,7 @@ public class Printer {
     private void displayTonerLevel() {
         System.out.println("Toner level: " + this.tonerLevel);
     }
-    public void printDocs(int numberOfPrinting) {
+    public void printDocs(int numberOfPrinting, boolean doubleSided) {
 
         // Invalid printing number
         if (numberOfPrinting < 0) {
@@ -33,16 +34,28 @@ public class Printer {
             int printCounter = 0;  // Set counter
             System.out.println("Start printing " + numberOfPrinting + " page document.");
 
-            // Printing loop
-            for (int i=1; i<=numberOfPrinting; ++i) {
-
-                // When not enough toner
-                if (tonerLevel <= 0) {
-                    System.out.println("Not enough toner. Print stopped.");
-                    break;
-
-                // Shen enough toner
-                } else {
+            // Double-sided print
+            if (doubleSided) {
+                System.out.println("Double sided printing.");
+                for (int i = 1; i <= numberOfPrinting; i+=2) {
+                    if (tonerLevel <= 1) {
+                        System.out.println("Not enough toner. Print stopped.");
+                        break;
+                    }
+                    tonerLevel -= 2;
+                    numberOfPagePrinted += 2;
+                    printCounter += 2;
+                    System.out.println("  Page " + i + " & " + (i + 1) + " printed.");
+                }
+            }
+            // Single-sided print
+            else if (!doubleSided) {
+                System.out.println("Single sided printing.");
+                for (int i=1; i<=numberOfPrinting; ++i) {
+                    if (tonerLevel <= 0) {
+                        System.out.println("Not enough toner. Print stopped.");
+                        break;
+                    }
                     --tonerLevel;
                     ++numberOfPagePrinted;
                     ++printCounter;
