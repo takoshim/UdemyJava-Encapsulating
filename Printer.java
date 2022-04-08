@@ -15,9 +15,13 @@ public class Printer {
     public Printer() {
         this(20, 0, false);
         System.out.println("You bought a new printer!");
+        displayTonerLevel();
         System.out.println("********************");
     }
 
+    private void displayTonerLevel() {
+        System.out.println("Toner level: " + this.tonerLevel);
+    }
     public void printDocs(int numberOfPrinting) {
         int printCounter = 0;
         if (numberOfPrinting < 0) {
@@ -39,7 +43,7 @@ public class Printer {
         if (printCounter >= numberOfPrinting) {
             System.out.println("Complete printing " + numberOfPrinting + " pages document.");
         }
-        System.out.println("Toner level: " + this.tonerLevel);
+        displayTonerLevel();
         System.out.println("********************");
     }
 
@@ -60,7 +64,7 @@ public class Printer {
             System.out.println("A new genuine toner is set.");
             this.tonerLevel = tonerLevel;
         }
-        System.out.println("Toner level: " + this.tonerLevel);
+        displayTonerLevel();
         System.out.println("********************");
     }
 }
