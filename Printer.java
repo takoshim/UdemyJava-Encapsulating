@@ -23,28 +23,41 @@ public class Printer {
         System.out.println("Toner level: " + this.tonerLevel);
     }
     public void printDocs(int numberOfPrinting) {
-        int printCounter = 0;
+
+        // Invalid printing number
         if (numberOfPrinting < 0) {
             System.out.println("Invalid number of page.");
-        }
 
-        System.out.println("Start printing " + numberOfPrinting + " page document.");
-        for (int i=1; i<=numberOfPrinting; ++i) {
-            if (tonerLevel <= 0) {
-                System.out.println("Not enough toner. Print stopped.");
-                break;
-            } else {
-                --tonerLevel;
-                ++numberOfPagePrinted;
-                ++printCounter;
-                System.out.println("  Page " + i + " printed.");
+        // Valid printing number
+        } else {
+            int printCounter = 0;  // Set counter
+            System.out.println("Start printing " + numberOfPrinting + " page document.");
+
+            // Printing loop
+            for (int i=1; i<=numberOfPrinting; ++i) {
+
+                // When not enough toner
+                if (tonerLevel <= 0) {
+                    System.out.println("Not enough toner. Print stopped.");
+                    break;
+
+                // Shen enough toner
+                } else {
+                    --tonerLevel;
+                    ++numberOfPagePrinted;
+                    ++printCounter;
+                    System.out.println("  Page " + i + " printed.");
+                }
+            }
+            // Complete printing
+            if (printCounter >= numberOfPrinting) {
+                System.out.println("Complete printing " + numberOfPrinting + " pages document.");
             }
         }
-        if (printCounter >= numberOfPrinting) {
-            System.out.println("Complete printing " + numberOfPrinting + " pages document.");
-        }
+        // Display toner level and finish
         displayTonerLevel();
         System.out.println("********************");
+
     }
 
     public void turnOnDuplexPrint() {
@@ -56,6 +69,7 @@ public class Printer {
     public void refillToner(int tonerLevel) {
         System.out.println("Refilling toner with " + tonerLevel + "% toner.");
 
+        // Check if genuine toner and remaining level of 100%
         if (tonerLevel < 0 || tonerLevel > 100) {
             System.out.println("Invalid level of remaining toner.");
         } else if (tonerLevel < 100) {
@@ -64,6 +78,8 @@ public class Printer {
             System.out.println("A new genuine toner is set.");
             this.tonerLevel = tonerLevel;
         }
+
+        // Display toner level and finish
         displayTonerLevel();
         System.out.println("********************");
     }

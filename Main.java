@@ -10,6 +10,6 @@ public class Main {
         printer.refillToner(120);
         printer.refillToner(-10);
         printer.refillToner(100);
-        printer.printDocs(120);
+        printer.printDocs(-10);
     }
 }
